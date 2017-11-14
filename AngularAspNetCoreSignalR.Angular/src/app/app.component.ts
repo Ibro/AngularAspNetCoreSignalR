@@ -22,5 +22,10 @@ export class AppComponent implements OnInit {
       .then(() => console.log('Connection started!'))
       .catch(err => console.log('Error while establishing connection :('));
 
+      this._hubConnection.on('sendToAll', (nick: string, receivedMessage: string) => {
+        const text = `${nick}: ${receivedMessage}`;
+        this.messages.push(text);
+      });
+
     }
 }

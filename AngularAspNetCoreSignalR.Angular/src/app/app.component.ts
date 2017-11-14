@@ -12,6 +12,12 @@ export class AppComponent implements OnInit {
   message = '';
   messages: string[] = [];
 
+  public sendMessage(): void {
+    this._hubConnection
+      .invoke('sendToAll', this.nick, this.message)
+      .catch(err => console.error(err));
+  }
+
   ngOnInit() {
     this.nick = window.prompt('Your name:', 'John');
 
